@@ -167,6 +167,7 @@ if ["%answer%"] == ["d"] goto dd
 if ["%answer%"] == ["E"] goto disp
 if ["%answer%"] == ["e"] goto disp
 :wd40
+rem redundant code that works :)
 set c1r1tile1=%c1r1tile1t%
 set c1r2tile2=%c1r2tile2t%
 set c1r3tile3=%c1r3tile3t%
