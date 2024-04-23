@@ -134,6 +134,7 @@ set c5r2tile2=%c5r2tile2t%
 set c5r3tile3=%c5r3tile3t%
 set c5r4tile4=%c5r4tile4t%
 set c5r5tile5=%c5r5tile5t%
+set playert=▲
 set rc=3
 set cr=3
 set t=3
@@ -142,7 +143,7 @@ set c3r3tile3=░▲░
 set playerpos=c%cr%r%rc%tile%t%
 cls
 :disp
-set c%cr%r%rc%tile%t%=░▲░
+set c%cr%r%rc%tile%t%=░%playert%░
 cls
 echo %playerpos%
 echo %c1r1tile1%%c1r2tile2%%c1r3tile3%%c1r4tile4%%c1r5tile5%
@@ -193,6 +194,7 @@ set c5r2tile2=%c5r2tile2t%
 set c5r3tile3=%c5r3tile3t%
 set c5r4tile4=%c5r4tile4t%
 set c5r5tile5=%c5r5tile5t%
+set playert=▲
 set /a cr=%cr%-1
 set playerpos=c%cr%r%rc%tile%t%
 goto disp
@@ -222,6 +224,7 @@ set c5r2tile2=%c5r2tile2t%
 set c5r3tile3=%c5r3tile3t%
 set c5r4tile4=%c5r4tile4t%
 set c5r5tile5=%c5r5tile5t%
+set playert=◄
 set /a rc=%rc%-1
 set /a t=%t%-1
 set playerpos=c%cr%r%rc%tile%t%
@@ -252,6 +255,7 @@ set c5r2tile2=%c5r2tile2t%
 set c5r3tile3=%c5r3tile3t%
 set c5r4tile4=%c5r4tile4t%
 set c5r5tile5=%c5r5tile5t%
+set playert=▼
 set /a cr=%cr%+1
 set playerpos=c%cr%r%rc%tile%t%
 goto disp
@@ -281,6 +285,7 @@ set c5r2tile2=%c5r2tile2t%
 set c5r3tile3=%c5r3tile3t%
 set c5r4tile4=%c5r4tile4t%
 set c5r5tile5=%c5r5tile5t%
+set playert=►
 set /a rc=%rc%+1
 set /a t=%t%+1
 set playerpos=c%cr%r%rc%tile%t%
