@@ -134,13 +134,53 @@ set c5r2tile2=%c5r2tile2t%
 set c5r3tile3=%c5r3tile3t%
 set c5r4tile4=%c5r4tile4t%
 set c5r5tile5=%c5r5tile5t%
+set rc=3
+set cr=3
+set t=3
 rem playerstart
 set c3r3tile3=░▲░
+set playerpos=c%cr%r%rc%tile%t%
 cls
 :disp
+cls
+echo %playerpos%
 echo %c1r1tile1%%c1r2tile2%%c1r3tile3%%c1r4tile4%%c1r5tile5%
 echo %c2r1tile1%%c2r2tile2%%c2r3tile3%%c2r4tile4%%c2r5tile5%
 echo %c3r1tile1%%c3r2tile2%%c3r3tile3%%c3r4tile4%%c3r5tile5%
 echo %c4r1tile1%%c4r2tile2%%c4r3tile3%%c4r4tile4%%c4r5tile5%
 echo %c5r1tile1%%c5r2tile2%%c5r3tile3%%c5r4tile4%%c5r5tile5%
-pause
+echo W. Forward
+echo A. Left
+echo S. Right
+echo D. Backward
+echo E. Inventory(not done yet)
+set /p "answer=Select your option: "
+if ["%answer%"] == ["W"] goto wd40
+if ["%answer%"] == ["w"] goto wd40
+if ["%answer%"] == ["A"] goto ad
+if ["%answer%"] == ["a"] goto ad
+if ["%answer%"] == ["S"] goto sd
+if ["%answer%"] == ["s"] goto sd
+if ["%answer%"] == ["D"] goto dd
+if ["%answer%"] == ["d"] goto dd
+if ["%answer%"] == ["E"] goto disp
+if ["%answer%"] == ["e"] goto disp
+:wd40
+set /a cr=%cr%-1
+set playerpos=c%cr%r%rc%tile%t%
+goto disp
+:ad
+set /a rc=%rc%-1
+set /a t=%t%-1
+set playerpos=c%cr%r%rc%tile%t%
+goto disp
+:sd
+set /a cr=%cr%+1
+set playerpos=c%cr%r%rc%tile%t%
+goto disp
+:dd
+set /a rc=%rc%+1
+set /a t=%t%+1
+set playerpos=c%cr%r%rc%tile%t%
+goto disp
+:disploop
