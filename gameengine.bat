@@ -218,6 +218,7 @@ echo S. Right
 echo D. Backward
 echo E. Inventory(not done yet)
 echo Q. Pause(not done yet)
+echo Made by LSSwastaken on github
 set /p "answer=Select your option: "
 if ["%answer%"] == ["W"] goto wd40
 if ["%answer%"] == ["w"] goto wd40
