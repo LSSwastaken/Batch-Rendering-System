@@ -298,7 +298,7 @@ if [%cr%] == [0] set /a cr=%cr%+1
 set playerpos=c%cr%r%rc%tile%t%
 rem when adding walls add the wall to each of the lists
 rem do the math to find where th next screen is, i use a 3x3 map
-if ["%map%"] == ["5"] goto r2map2colw
+if ["%map%"] == ["2"] goto r2map2colw
 goto disp
 :r2map2colw
 if ["cr"] == ["0"] goto wllw
