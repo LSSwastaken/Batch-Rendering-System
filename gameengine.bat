@@ -1014,8 +1014,8 @@ echo W. Forward
 echo A. Left
 echo S. Right
 echo D. Backward
-echo E. Inventory(not done yet)
-echo Q. Pause(not done yet)
+echo E. Inventory(do it yourself for rn, ill add it ti this SDK later :) )
+echo Q. Pause
 echo R. Reload textures
 echo Made by LSSwastaken on github
 set /p "answer=Select your option: "
@@ -1074,7 +1074,30 @@ cd %userprofile%/documents
 cd "Login System"
 cd "Saves"
 cd "%user%"
-goto pause
+goto disp
+:stat
+cls
+echo █▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄▄▄██
+echo ▐%c1r1tile1%%c1r2tile2%%c1r3tile3%%c1r4tile4%%c1r5tile5%%c1r6tile6%%c1r7tile7%%c1r8tile8%%c1r9tile9%%c1r10tile10%▌▌Pause Menu▐▌
+echo ▐%c2r1tile1%%c2r2tile2%%c2r3tile3%%c2r4tile4%%c2r5tile5%%c2r6tile6%%c2r7tile7%%c2r8tile8%%c2r9tile9%%c2r10tile10%▌▌1. Save   ▐▌
+echo ▐%c3r1tile1%%c3r2tile2%%c3r3tile3%%c3r4tile4%%c3r5tile5%%c3r6tile6%%c3r7tile7%%c3r8tile8%%c3r9tile9%%c3r10tile10%▌▌2. Quit   ▐▌┌──────────────────┐
+echo ▐%c4r1tile1%%c4r2tile2%%c4r3tile3%%c4r4tile4%%c4r5tile5%%c4r6tile6%%c4r7tile7%%c4r8tile8%%c4r9tile9%%c4r10tile10%▌▌3. Stats  ▐▌│Nothing to display│
+echo ▐%c5r1tile1%%c5r2tile2%%c5r3tile3%%c5r4tile4%%c5r5tile5%%c5r6tile6%%c5r7tile7%%c5r8tile8%%c5r9tile9%%c5r10tile10%▌▌4. Resume ▐▌└──────────────────┘
+echo █▀▀▀▀▀▀▀▀▀▀██▀▀▀▀▀▀▀▀▀▀██
+pause
+goto disp
+:quit
+cls
+echo ┌─────────────┐
+echo │Are you Sure?│
+echo ├─────────────┤
+echo │    Y/N?     │
+echo └─────────────┘
+set /p "answer=Select your option: "
+if ["%answer%"] == ["y"] goto shadowrealm
+if ["%answer%"] == ["n"] goto pause
+if ["%answer%"] == ["Y"] goto shadowrealm
+if ["%answer%"] == ["N"] goto pause
 :wd40
 rem redundant code that works :)
 set c1r1tile1=%c1r1tile1t%
