@@ -2,6 +2,25 @@ rem alternative system of rendering were maps are prebaked into the code
 @echo off
 setlocal EnableDelayedExpansion
 chcp 65001
+cd %userprofile%/documents
+cd "Login System"
+call cuser.bat
+cd "Saves"
+if EXIST "%user%" gotp spoink
+md "%user%"
+:spoink
+cd "%user%"
+if EXIST "savedata" goto pluh
+goto pain
+:pluh
+cd "savedata"
+call savdata.bat
+call savdata1.bat
+call savdata2.bat
+call savdata3.bat
+set c%cr%r%rc%tile%t%=%playert%
+goto r%mr%map%rmap%
+:pain
 cls
 rem precursors for the player
 set cr=1
@@ -976,7 +995,9 @@ rem playerstart
 cls
 :disp
 set c%cr%r%rc%tile%t%=%playert%
+call cuser.bat
 cls
+echo User: %user%
 echo %playerpos%
 echo %enc%
 echo %mr%
@@ -1008,10 +1029,52 @@ if ["%answer%"] == ["D"] goto dd
 if ["%answer%"] == ["d"] goto dd
 if ["%answer%"] == ["E"] goto disp
 if ["%answer%"] == ["e"] goto disp
-if ["%answer%"] == ["Q"] goto disp
-if ["%answer%"] == ["q"] goto disp
+if ["%answer%"] == ["Q"] goto pause
+if ["%answer%"] == ["q"] goto pause
 if ["%answer%"] == ["R"] goto r%mr%map%rmap%
 if ["%answer%"] == ["r"] goto r%mr%map%rmap%
+:pause
+cls
+echo User: %user%
+echo %playerpos%
+echo %enc%
+echo %mr%
+echo %rmap%
+rem pause menu
+echo █▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄▄▄██
+echo ▐%c1r1tile1%%c1r2tile2%%c1r3tile3%%c1r4tile4%%c1r5tile5%%c1r6tile6%%c1r7tile7%%c1r8tile8%%c1r9tile9%%c1r10tile10%▌▌Pause Menu▐▌
+echo ▐%c2r1tile1%%c2r2tile2%%c2r3tile3%%c2r4tile4%%c2r5tile5%%c2r6tile6%%c2r7tile7%%c2r8tile8%%c2r9tile9%%c2r10tile10%▌▌1. Save   ▐▌
+echo ▐%c3r1tile1%%c3r2tile2%%c3r3tile3%%c3r4tile4%%c3r5tile5%%c3r6tile6%%c3r7tile7%%c3r8tile8%%c3r9tile9%%c3r10tile10%▌▌2. Quit   ▐▌
+echo ▐%c4r1tile1%%c4r2tile2%%c4r3tile3%%c4r4tile4%%c4r5tile5%%c4r6tile6%%c4r7tile7%%c4r8tile8%%c4r9tile9%%c4r10tile10%▌▌3. Stats  ▐▌
+echo ▐%c5r1tile1%%c5r2tile2%%c5r3tile3%%c5r4tile4%%c5r5tile5%%c5r6tile6%%c5r7tile7%%c5r8tile8%%c5r9tile9%%c5r10tile10%▌▌4. Resume ▐▌
+echo █▀▀▀▀▀▀▀▀▀▀██▀▀▀▀▀▀▀▀▀▀██
+set /p "answer=Select your option: "
+if ["%answer%"] == ["1"] goto save
+if ["%answer%"] == ["2"] goto quit
+if ["%answer%"] == ["3"] goto stat
+if ["%answer%"] == ["4"] goto disp
+goto disp
+:save
+cd %userprofile%/documents
+cd "Login System"
+cd "Saves"
+cd %user%
+if EXIST "savedata" goto sploink
+md "savedata"
+:sploink
+cd "savedata"
+echo set "playerpos=%playerpos%"> savdata.bat
+echo set "rmap=%rmap%">> savdata.bat
+echo set "mr=%mr%"> savdata1.bat
+echo set "playert=%playert%">> savdata1.bat
+echo set "cr=%cr%"> savdata2.bat
+echo set "rc=%rc%">> savdata2.bat
+echo set "t=%t%"> savdata3.bat
+cd %userprofile%/documents
+cd "Login System"
+cd "Saves"
+cd "%user%"
+goto pause
 :wd40
 rem redundant code that works :)
 set c1r1tile1=%c1r1tile1t%
