@@ -1,2 +1,1 @@
-help.
-I did it, it works!!!
+make a folder path of Login System with a folder inside named Saves in Login system make a cuser.bat file and inside put set "user=(your name)" then run the game engine and you should see User: (your name) on the debug hud
