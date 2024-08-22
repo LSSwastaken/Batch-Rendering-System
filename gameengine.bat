@@ -1,13 +1,19 @@
-rem alternative system of rendering were maps are prebaked into the code
+rem system for maps and stuff :)
 @echo off
 setlocal EnableDelayedExpansion
+set enemyt=♦
+set /a PHP=100
 chcp 65001
 cd %userprofile%/documents
 cd "Login System"
 call cuser.bat
 cd "Saves"
-if EXIST "%user%" gotp spoink
+if EXIST "%user%" goto spoink
 md "%user%"
+cd "%user%"
+echo "set filler=7"> pinv.bat
+if EXIST "savedata" goto pluh
+goto pain
 :spoink
 cd "%user%"
 if EXIST "savedata" goto pluh
@@ -27,14 +33,14 @@ set cr=1
 set rc=1
 set t=1
 set playert=▲
+set enemyt=♦
 set rc=5
 set cr=3
 set t=5
 set playerpos=c%cr%r%rc%tile%t%
 rem there is a list for walls, this is covered in th :wd40 area
-rem the c#r#tile#ps flags are unused, and for sanitys sake im going to hardcode the players start for now
-rem the t flag is just the texture so i can override it for the player render
 goto :r2map2
+rem MAP DATA
 :r1map1
 set /a mr=1
 set /a rmap=1
@@ -144,7 +150,7 @@ goto disp
 :r1map2
 set /a mr=1
 set /a rmap=2
-set c1r1tile1t=░
+set c1r1tile1t=■
 set c1r2tile2t=░
 set c1r3tile3t=░
 set c1r4tile4t=░
@@ -154,7 +160,7 @@ set c1r7tile7t=░
 set c1r8tile8t=░
 set c1r9tile9t=░
 set c1r10tile10t=░
-set c2r1tile1t=░
+set c2r1tile1t=♥
 set c2r2tile2t=░
 set c2r3tile3t=░
 set c2r4tile4t=░
@@ -246,6 +252,10 @@ set c5r9tile9=%c5r9tile9t%
 set c5r10tile10=%c5r10tile10t%
 set playerpos=c%cr%r%rc%tile%t%
 set c%cr%r%rc%tile%t%=%playert%
+set r1m2e[1]=c3r1tile1
+set r1m2ec[1]=3
+set r1m2er[1]=1
+set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
 goto disp
 :r1map3
 set /a mr=1
@@ -566,6 +576,8 @@ set c5r7tile7=%c5r7tile7t%
 set c5r8tile8=%c5r8tile8t%
 set c5r9tile9=%c5r9tile9t%
 set c5r10tile10=%c5r10tile10t%
+set playerpos=c%cr%r%rc%tile%t%
+set c%cr%r%rc%tile%t%=%playert%
 goto disp
 :r2map3
 set /a mr=2
@@ -992,17 +1004,22 @@ set playerpos=c%cr%r%rc%tile%t%
 set c%cr%r%rc%tile%t%=%playert%
 goto disp
 rem playerstart
+rem MAP DATA END
 cls
 :disp
+rem DEBUG STUFF
 set c%cr%r%rc%tile%t%=%playert%
 call cuser.bat
 cls
 echo User: %user%
 echo %playerpos%
+echo %r1m2e[1]%
 echo %enc%
 echo %mr%
 echo %rmap%
 rem the black is the line to send you to the next screen
+rem NORMAL Heads-Up-Dislay START
+echo HP: %PHP%
 echo █▄▄▄▄▄▄▄▄▄▄█
 echo ▐%c1r1tile1%%c1r2tile2%%c1r3tile3%%c1r4tile4%%c1r5tile5%%c1r6tile6%%c1r7tile7%%c1r8tile8%%c1r9tile9%%c1r10tile10%▌
 echo ▐%c2r1tile1%%c2r2tile2%%c2r3tile3%%c2r4tile4%%c2r5tile5%%c2r6tile6%%c2r7tile7%%c2r8tile8%%c2r9tile9%%c2r10tile10%▌
@@ -1014,7 +1031,7 @@ echo W. Forward
 echo A. Left
 echo S. Right
 echo D. Backward
-echo E. Inventory(do it yourself for rn, ill add it ti this SDK later :) )
+echo E. Inventory(do it yourself for rn, ill add it to this SDK later :) )
 echo Q. Pause
 echo R. Reload textures
 echo Made by LSSwastaken on github
@@ -1027,20 +1044,24 @@ if ["%answer%"] == ["S"] goto sd
 if ["%answer%"] == ["s"] goto sd
 if ["%answer%"] == ["D"] goto dd
 if ["%answer%"] == ["d"] goto dd
-if ["%answer%"] == ["E"] goto disp
-if ["%answer%"] == ["e"] goto disp
+if ["%answer%"] == ["E"] goto inv
+if ["%answer%"] == ["e"] goto inv
 if ["%answer%"] == ["Q"] goto pause
 if ["%answer%"] == ["q"] goto pause
 if ["%answer%"] == ["R"] goto r%mr%map%rmap%
 if ["%answer%"] == ["r"] goto r%mr%map%rmap%
+:inv
+start "" isuffer.bat
+goto pause
 :pause
 cls
 echo User: %user%
-echo %playerpos%
+echo POS: %playerpos%
 echo %enc%
-echo %mr%
-echo %rmap%
+echo Map line 1: %mr%
+echo Map line 2: %rmap%
 rem pause menu
+echo HP: %PHP%
 echo █▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄▄▄██
 echo ▐%c1r1tile1%%c1r2tile2%%c1r3tile3%%c1r4tile4%%c1r5tile5%%c1r6tile6%%c1r7tile7%%c1r8tile8%%c1r9tile9%%c1r10tile10%▌▌Pause Menu▐▌
 echo ▐%c2r1tile1%%c2r2tile2%%c2r3tile3%%c2r4tile4%%c2r5tile5%%c2r6tile6%%c2r7tile7%%c2r8tile8%%c2r9tile9%%c2r10tile10%▌▌1. Save   ▐▌
@@ -1059,9 +1080,9 @@ cd %userprofile%/documents
 cd "Login System"
 cd "Saves"
 cd %user%
-if EXIST "savedata" goto sploink
+if EXIST "savedata" goto splroink
 md "savedata"
-:sploink
+:splroink
 cd "savedata"
 echo set "playerpos=%playerpos%"> savdata.bat
 echo set "rmap=%rmap%">> savdata.bat
@@ -1070,6 +1091,7 @@ echo set "playert=%playert%">> savdata1.bat
 echo set "cr=%cr%"> savdata2.bat
 echo set "rc=%rc%">> savdata2.bat
 echo set "t=%t%"> savdata3.bat
+echo set "PHP=%PHP%">> savdata3.bat
 cd %userprofile%/documents
 cd "Login System"
 cd "Saves"
@@ -1077,6 +1099,7 @@ cd "%user%"
 goto disp
 :stat
 cls
+echo HP: %PHP%
 echo █▄▄▄▄▄▄▄▄▄▄██▄▄▄▄▄▄▄▄▄▄██
 echo ▐%c1r1tile1%%c1r2tile2%%c1r3tile3%%c1r4tile4%%c1r5tile5%%c1r6tile6%%c1r7tile7%%c1r8tile8%%c1r9tile9%%c1r10tile10%▌▌Pause Menu▐▌
 echo ▐%c2r1tile1%%c2r2tile2%%c2r3tile3%%c2r4tile4%%c2r5tile5%%c2r6tile6%%c2r7tile7%%c2r8tile8%%c2r9tile9%%c2r10tile10%▌▌1. Save   ▐▌
@@ -1151,6 +1174,7 @@ set c5r8tile8=%c5r8tile8t%
 set c5r9tile9=%c5r9tile9t%
 set c5r10tile10=%c5r10tile10t%
 set playert=▲
+set enemyt=♦
 set /a cr=%cr%-1
 set playerpos=c%cr%r%rc%tile%t%
 goto r%mr%map%rmap%colw
@@ -1158,7 +1182,19 @@ goto r%mr%map%rmap%colw
 if [%cr%] == [0] goto wllw
 goto disp
 :r1map2colw
+rem Test The EnemyAI
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+if ["%r1m2ec[1]%"] lss ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%+1
+if ["%r1m2ec[1]%"] gtr ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%-1
+if ["%r1m2er[1]%"] lss ["%rc%"] set /a r1m2er[1]=%r1m2er[1]%+1
+if ["%r1m2er[1]%"] gtr ["%rc%"] set /a r1m2er[1]=%r1m2er[1]%-1
+set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
+set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+rem Collision
 if [%cr%] == [0] goto wllw
+if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c2r1tile1"] goto heal
 goto disp
 :r1map3colw
 if [%cr%] == [0] goto wllw
@@ -1273,7 +1309,20 @@ goto r%mr%map%rmap%cola
 if [%rc%] == [0] goto wlla
 goto disp
 :r1map2cola
+rem EnAI
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+if ["%r1m2ec[1]%"] lss ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%+1
+if ["%r1m2ec[1]%"] gtr ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%-1
+if ["%r1m2er[1]%"] lss ["%rc%"] set /a r1m2er[1]=%r1m2er[1]%+1
+if ["%r1m2er[1]%"] gtr ["%rc%"] set /a r1m2er[1]=%r1m2er[1]%-1
+set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
+set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+rem Collision
 if [%rc%] == [0] goto tra
+if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c2r1tile1"] goto heal
+if ["%playerpos%"] == ["c3r1tile1"] goto encounter
 goto disp
 :r1map3cola
 if [%rc%] == [0] goto tra
@@ -1387,7 +1436,19 @@ goto r%mr%map%rmap%cols
 if [%cr%] == [6] goto trs
 goto disp
 :r1map2cols
+rem EnAI
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+if ["%r1m2ec[1]%"] lss ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%+1
+if ["%r1m2ec[1]%"] gtr ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%-1
+if ["%r1m2er[1]%"] lss ["%rc%"] set /a r1m2er[1]=%r1m2er[1]%+1
+if ["%r1m2er[1]%"] gtr ["%rc%"] set /a r1m2er[1]=%r1m2er[1]%-1
+set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
+set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+rem Collision
 if [%cr%] == [6] goto trs
+if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c2r1tile1"] goto heal
 goto disp
 :r1map3cols
 if [%cr%] == [6] goto trs
@@ -1500,7 +1561,20 @@ goto r%mr%map%rmap%cold
 if [%rc%] == [11] goto trd
 goto disp
 :r1map2cold
+rem EnAI
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+if [%r1m2ec[1]%] lss [%cr%] set /a r1m2ec[1]=%r1m2ec[1]%+1
+if [%r1m2ec[1]%] gtr [%cr%] set /a r1m2ec[1]=%r1m2ec[1]%-1
+if [%r1m2er[1]%] lss [%rc%] set /a r1m2er[1]=%r1m2er[1]%+1
+if [%r1m2er[1]%] gtr [%rc%] set /a r1m2er[1]=%r1m2er[1]%-1
+set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
+set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
+if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
+rem Collision
 if [%rc%] == [11] goto trd
+if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c2r1tile1"] goto heal
+if ["%playerpos%"] == ["c3r1tile1"] goto encounter
 goto disp
 :r1map3cold
 if [%rc%] == [11] goto wlld
@@ -1555,4 +1629,9 @@ set /a rc=%rc%-1
 set /a t=%t%-1
 set playerpos=c%cr%r%rc%tile%t%
 goto disp
-:disploop
+:damage
+set /a php=%php%-1
+goto disp
+:heal
+set /a php=%php%+1
+goto disp
