@@ -1182,6 +1182,9 @@ goto r%mr%map%rmap%colw
 if [%cr%] == [0] goto wllw
 goto disp
 :r1map2colw
+set rr=1
+set mm=2
+set cc=w
 rem Test The EnemyAI
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 if ["%r1m2ec[1]%"] lss ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%+1
@@ -1192,8 +1195,9 @@ set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
 set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 rem Collision
+:r1map2colwb
 if [%cr%] == [0] goto wllw
-if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c1r1tile1"] goto damage2
 if ["%playerpos%"] == ["c2r1tile1"] goto heal
 goto disp
 :r1map3colw
@@ -1310,6 +1314,9 @@ if [%rc%] == [0] goto wlla
 goto disp
 :r1map2cola
 rem EnAI
+set rr=1
+set mm=2
+set cc=a
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 if ["%r1m2ec[1]%"] lss ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%+1
 if ["%r1m2ec[1]%"] gtr ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%-1
@@ -1319,10 +1326,10 @@ set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
 set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 rem Collision
+:r1map2colab
 if [%rc%] == [0] goto tra
-if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c1r1tile1"] goto damage2
 if ["%playerpos%"] == ["c2r1tile1"] goto heal
-if ["%playerpos%"] == ["c3r1tile1"] goto encounter
 goto disp
 :r1map3cola
 if [%rc%] == [0] goto tra
@@ -1436,6 +1443,9 @@ goto r%mr%map%rmap%cols
 if [%cr%] == [6] goto trs
 goto disp
 :r1map2cols
+set rr=1
+set mm=2
+set cc=s
 rem EnAI
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 if ["%r1m2ec[1]%"] lss ["%cr%"] set /a r1m2ec[1]=%r1m2ec[1]%+1
@@ -1446,8 +1456,9 @@ set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
 set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 rem Collision
+:r1map2colsb
 if [%cr%] == [6] goto trs
-if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c1r1tile1"] goto damage2
 if ["%playerpos%"] == ["c2r1tile1"] goto heal
 goto disp
 :r1map3cols
@@ -1561,6 +1572,9 @@ goto r%mr%map%rmap%cold
 if [%rc%] == [11] goto trd
 goto disp
 :r1map2cold
+set rr=1
+set mm=2
+set cc=d
 rem EnAI
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 if [%r1m2ec[1]%] lss [%cr%] set /a r1m2ec[1]=%r1m2ec[1]%+1
@@ -1571,10 +1585,10 @@ set r1m2e[1]=c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%
 set c%r1m2ec[1]%r%r1m2er[1]%tile%r1m2er[1]%=%enemyt%
 if ["%playerpos%"] == ["%r1m2e[1]%"] goto damage
 rem Collision
+:r1map2coldb
 if [%rc%] == [11] goto trd
-if ["%playerpos%"] == ["c1r1tile1"] goto damage
+if ["%playerpos%"] == ["c1r1tile1"] goto damage2
 if ["%playerpos%"] == ["c2r1tile1"] goto heal
-if ["%playerpos%"] == ["c3r1tile1"] goto encounter
 goto disp
 :r1map3cold
 if [%rc%] == [11] goto wlld
@@ -1611,10 +1625,10 @@ goto disp
 if [%rc%] == [11] goto wlld
 goto disp
 :r3map1cold
-if [%rc%] == [11] goto tra
+if [%rc%] == [11] goto trd
 goto disp
 :r3map2cold
-if [%rc%] == [11] goto tra
+if [%rc%] == [11] goto trd
 goto disp
 :r3map3cold
 if [%rc%] == [11] goto wlld
@@ -1631,7 +1645,10 @@ set playerpos=c%cr%r%rc%tile%t%
 goto disp
 :damage
 set /a php=%php%-1
-goto disp
+goto r%rr%map%mm%col%cc%b
 :heal
 set /a php=%php%+1
+goto disp
+:damage2
+set /a php=%php%-1
 goto disp
